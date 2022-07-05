@@ -1,0 +1,39 @@
+options:
+	np: &cInsufficient permissions.
+
+command /troll [<text>] [<player>] [<integer>]:
+	permission: core.troll
+	permmission message: {@np}
+	trigger:
+	
+		if arg-3 is not set:
+			set {_amt} to 5
+			
+		if arg-3 is set:
+			set {_amt} to arg-3
+			
+		if arg-2 is not set:
+			send "&8» &cYou need a user." to player
+		
+		if arg-1 is not set:
+			send "&8» &cUsage : /troll <arg> <user> <value>" to player
+			
+		if arg-1 is "push":
+			push arg-2 upwards at speed 2
+			wait 1 seconds
+			push arg-2 forward at speed {_amt}
+			
+			
+			send "&7[&8Troll&7] &8» &7You trolled %arg-2%!" to player
+			
+		if arg-1 is "heaven":
+			teleport arg-2 to block {_amt} above block at location of arg-2
+			send "&7[&8Troll&7] &8» &7You trolled %arg-2%!" to player
+			
+			
+			
+		
+			
+	
+on tab complete of "/troll":
+	set tab completions for position 1 to "push" and "heaven"
